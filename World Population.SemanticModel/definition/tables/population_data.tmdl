@@ -1,0 +1,123 @@
+table population_data
+	lineageTag: 5c4bad56-3467-4e92-8b2d-d1e79cdab2ec
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: ed451887-ffa5-451f-b55f-203b972d6e59
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country (or dependency)'
+		dataType: string
+		lineageTag: 109d0faa-78d0-4cad-a00b-5fdcf713e3ef
+		summarizeBy: none
+		sourceColumn: Country (or dependency)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Population 2025'
+		dataType: int64
+		formatString: 0
+		lineageTag: f68f4cc1-3bbc-49f0-81ce-7a4c263ff8b7
+		summarizeBy: sum
+		sourceColumn: Population 2025
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Yearly Change'
+		dataType: string
+		lineageTag: 7eab32cc-c539-4e84-87f2-834d426cdfaf
+		summarizeBy: none
+		sourceColumn: Yearly Change
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Change'
+		dataType: string
+		lineageTag: f1bdfbf8-758e-4178-ab19-8f93b78959f2
+		summarizeBy: none
+		sourceColumn: Net Change
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Density (P/Km²)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b156da3-45f3-4de5-8ca1-f33b9420f45d
+		summarizeBy: sum
+		sourceColumn: Density (P/Km²)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Land Area (Km²)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 03707b89-c7fd-470e-a0a5-7776b60ae932
+		summarizeBy: sum
+		sourceColumn: Land Area (Km²)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Migrants (net)'
+		dataType: string
+		lineageTag: 2cfd0e88-00db-4c85-ae9a-445c74ded483
+		summarizeBy: none
+		sourceColumn: Migrants (net)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fert. Rate'
+		dataType: double
+		lineageTag: 4cc62aa8-f3dc-4674-bf3d-bd187c871485
+		summarizeBy: sum
+		sourceColumn: Fert. Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Median Age'
+		dataType: double
+		lineageTag: 49717d9f-a16f-4492-82fa-48bf97e512aa
+		summarizeBy: sum
+		sourceColumn: Median Age
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Urban Pop %'
+		dataType: double
+		lineageTag: 0b4656b7-3015-48d3-a86d-68006ccfbccc
+		summarizeBy: sum
+		sourceColumn: Urban Pop %
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'World Share'
+		dataType: double
+		lineageTag: 268ad682-3628-4452-8d44-358c7e392042
+		summarizeBy: sum
+		sourceColumn: World Share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition population_data = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\maswe\Development\Power-Bi-Dev\population_data.csv"),[Delimiter=",", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id", Int64.Type}, {"Country (or dependency)", type text}, {"Population 2025", Int64.Type}, {"Yearly Change", type text}, {"Net Change", type text}, {"Density (P/Km²)", Int64.Type}, {"Land Area (Km²)", Int64.Type}, {"Migrants (net)", type text}, {"Fert. Rate", type number}, {"Median Age", type number}, {"Urban Pop %", Percentage.Type}, {"World Share", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "World Population"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "825cdd24-d13a-4afe-afc5-f49d5fa62a62"
+  }
+}

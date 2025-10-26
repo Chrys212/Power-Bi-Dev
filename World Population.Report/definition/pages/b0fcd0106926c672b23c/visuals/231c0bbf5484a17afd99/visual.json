@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "231c0bbf5484a17afd99",
+  "position": {
+    "x": 71.479955402588587,
+    "y": 99.277715836928593,
+    "z": 0,
+    "height": 488.44636191768865,
+    "width": 1161.5492752920645
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "population_data"
+                    }
+                  },
+                  "Property": "Country (or dependency)"
+                }
+              },
+              "queryRef": "population_data.Country (or dependency)",
+              "nativeQueryRef": "Country (or dependency)",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "population_data"
+                        }
+                      },
+                      "Property": "Population 2025"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(population_data.Population 2025)",
+              "nativeQueryRef": "Sum of Population 2025"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "population_data"
+                      }
+                    },
+                    "Property": "Population 2025"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "bcd835959c2ff4d9a305",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "population_data"
+              }
+            },
+            "Property": "Country (or dependency)"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0d39a8a850c7a92fb179",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "population_data"
+                  }
+                },
+                "Property": "Population 2025"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
